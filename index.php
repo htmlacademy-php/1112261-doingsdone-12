@@ -4,12 +4,36 @@ $show_complete_tasks = rand(0, 1);
 
 $projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
 $tasks = [
-    ["Собеседование в IT компании", "01.12.2019", "Работа", "false"],
-    ["Выполнить тестовое задание", "25.12.2019", "Работа", "false"],
-    ["Сделать задание первого раздела", "21.12.2019", "Учеба", "true"],
-    ["Встреча с другом", "22.12.2019", "Входящие", "false"],
-    ["Купить корм для кота", "null", "Домашние дела", "false"],
-    ["Заказать пиццу", "null", "Домашние дела", "false"]
+    [
+        "task" => "Собеседование в IT компании",
+        "date" => "01.12.2019",
+        "proj" => "Работа",
+        "isdone" => "false"],
+    [
+        "task" => "Выполнить тестовое задание",
+        "date" => "25.12.2019", 
+        "proj" => "Работа", 
+        "isdone" => "false"],
+    [
+        "task" => "Сделать задание первого раздела",
+        "date" => "21.12.2019",
+        "proj" => "Учеба",
+        "isdone" => "true"],
+    [
+        "task" => "Встреча с другом", 
+        "date" => "22.12.2019", 
+        "proj" => "Входящие", 
+        "isdone" => "false"],
+    [
+        "task" => "Купить корм для кота", 
+        "date" => "null", 
+        "proj" => "Домашние дела", 
+        "isdone" => "false"],
+    [
+        "task" => "Заказать пиццу", 
+        "date" => "null", 
+        "proj" => "Домашние дела", 
+        "isdone" => "false"]
 ];
 
 ?>
@@ -91,11 +115,12 @@ $tasks = [
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                    <?php foreach($tasks as $task) : ?>
+                    <tr class="tasks__item task <?php if( $task['isdone'] == "true") print("task--completed") ?> ">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <span class="checkbox__text"><?= $task['task'] ?></span>
                             </label>
                         </td>
 
@@ -103,8 +128,9 @@ $tasks = [
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
-                        <td class="task__date"></td>
+                        <td class="task__date"><?= $task['date'] ?></td>
                     </tr>
+                    <?php endforeach; ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                     <?php if ($show_complete_tasks == 1): ?>
                     	<tr class="tasks__item task task--completed">
