@@ -36,6 +36,15 @@ $tasks = [
         "isdone" => false]
 ];
 
+function quantityTask($argTask, $argProj) {
+    foreach($argTask as $task) {
+        $count = 0;
+        if ($task["proj"] == $argProj)
+        $count++;
+    }
+    return $count;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -80,7 +89,7 @@ $tasks = [
                         <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?php quantityTask($tasks, $project) ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
